@@ -6,6 +6,7 @@ let altCanvas = 640;
 let peça;
 let retras = 50;
 let contador = 0;
+let punts = 0
 let ampleTaulell = 10;
 let altTaulell = 20;
 
@@ -158,23 +159,23 @@ let peçagrafic = [
 
         [
             [0, 0, 0, 0],
-            [0, 0, 0, 1],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0]
+            [0, 1, 1, 0],
+            [0, 0, 1, 0],
+            [0, 0, 1, 0]
         ], [
             [0, 0, 0, 0],
             [0, 0, 0, 1],
-            [0, 0, 0, 0],
+            [0, 1, 1, 1],
             [0, 0, 0, 0]
         ], [
             [0, 0, 0, 0],
-            [0, 0, 0, 1],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0]
+            [0, 1, 0, 0],
+            [0, 1, 0, 0],
+            [0, 1, 1, 0]
         ], [
             [0, 0, 0, 0],
-            [0, 0, 0, 1],
-            [0, 0, 0, 0],
+            [0, 1, 1, 1],
+            [0, 1, 0, 0],
             [0, 0, 0, 0]
         ]
     ], [
@@ -243,7 +244,15 @@ function dibuixaTaulell() {
         }
     }
     
+ 
     
+    
+}
+function dibuixaPuntuacio(){
+    ctx.fillStyle = '#d81515';
+    ctx.font = '20px Arial';
+    ctx.fillText('Punts: ' + punts, 10, 20);
+
 }
 
 let objPeça = function () {
@@ -264,6 +273,7 @@ let objPeça = function () {
                     
                 }
                 if (filafeta) {
+                    punts += 10;
                     for (let moverfila = py; moverfila > 0; moverfila--) {
                         for (let px = 1; px <= ampleTaulell; px++) {
                             taulell[moverfila][px] = 0
@@ -290,7 +300,7 @@ let objPeça = function () {
     this.gameover = function () {
         let perdut = false;
         for (px = 1; px <= ampleTaulell; px++) {
-            if (taulell[0][px] != 0) {
+            if (taulell[3][px] != 0) {
                 perdut = true;
                 
             }
@@ -461,19 +471,26 @@ function inicialitzaTeclat() {
 )
 }
 
-let canço = new Audio("audio1.mp3")
-document.getElementById("musica").addEventListener ("click", function () {
-    let canço = new Audio("audio1.mp3")
-
-    canço.play();
-})
 
 function inicia() {
+    
     canvas = document.getElementById("canvas");
     ctx = canvas.getContext("2d");
-
+    
     canvas.style.width = ampleCanvas;
     canvas.style.height = altCanvas;
+
+    let canço = new Audio("audio1.mp3")
+    document.getElementById("musica").addEventListener ("click", function () {
+        if (canço.paused){
+            canço.play();
+        }else{
+            canço.pause()
+        }
+        
+    
+    
+    })
     
     peça = new objPeça();
     
@@ -489,6 +506,7 @@ function principal() {
     dibuixaTaulell();
     peça.caer();
     peça.dibuixa();
+    dibuixaPuntuacio();
     
 }
 
