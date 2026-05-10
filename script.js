@@ -40,7 +40,8 @@ let taulell = [
 ]
 
 let peçagrafic = [
-    [
+    [ 
+        //pieza 1
         [
             [0, 0, 0, 0],
             [0, 1, 1, 0],
@@ -63,6 +64,7 @@ let peçagrafic = [
             [0, 1, 0, 0]
         ]
     ], [
+        //pieza 2
         [
             [0, 0, 0, 0],
             [0, 0, 1, 0],
@@ -87,7 +89,7 @@ let peçagrafic = [
             [0, 0, 0, 1]
         ]
     ], [
-
+        //pieza 3
         [
             [0, 0, 0, 0],
             [0, 1, 1, 0],
@@ -110,7 +112,7 @@ let peçagrafic = [
             [0, 0, 0, 0]
         ]
     ], [
-
+        //pieza 4
         [
             [0, 0, 0, 0],
             [0, 0, 0, 0],
@@ -133,7 +135,7 @@ let peçagrafic = [
             [0, 0, 0, 1]
         ]
     ], [
-
+//pieza 5
         [
             [0, 0, 1, 0],
             [0, 0, 1, 0],
@@ -156,7 +158,7 @@ let peçagrafic = [
             [1, 1, 1, 1]
         ]
     ], [
-
+       // pieza 6
         [
             [0, 0, 0, 0],
             [0, 1, 1, 0],
@@ -179,7 +181,7 @@ let peçagrafic = [
             [0, 0, 0, 0]
         ]
     ], [
-
+//pieza 7
         [
             [0, 1, 0, 0],
             [0, 1, 0, 0],
@@ -202,7 +204,7 @@ let peçagrafic = [
             [0, 0, 0, 0]
         ]
     ], [
-
+        //pieza 8
         [
             [0, 0, 0, 0],
             [0, 1, 0, 0],
@@ -237,15 +239,20 @@ function dibuixaTaulell() {
         for (let px = 0; px <= ampleTaulell; px++) {
             if (taulell[py][px] != 0) {
                 
-                ctx.fillStyle = '#000000';
+              if (taulell[py][px] == 2) ctx.fillStyle = '#44b311';
+                if (taulell[py][px] == 3) ctx.fillStyle = '#0059ff'; 
+                if (taulell[py][px] == 4) ctx.fillStyle = '#ff006a'; 
+                if (taulell[py][px] == 5) ctx.fillStyle = '#f700ff'; 
+                if (taulell[py][px] == 6) ctx.fillStyle = '#fbff00'; 
+                if (taulell[py][px] == 7) ctx.fillStyle = '#ffcfcf'; 
+                if (taulell[py][px] == 8) ctx.fillStyle = '#aa822a'; 
+                if (taulell[py][px] == 9) ctx.fillStyle = '#18a0b3'; 
                 
                 ctx.fillRect((px - 1) * ampleF, (py - 4) * altF, ampleF, altF)
             }
         }
     }
-    
- 
-    
+     
     
 }
 function dibuixaPuntuacio(){
@@ -318,7 +325,7 @@ let objPeça = function () {
         for (let py = 0; py < 4; py++) {
             for (let px = 0; px < 4; px++) {
                 if (peçagrafic[this.tipo][this.angle][py][px] != 0) {
-                    taulell[this.y + py][this.x + px] = peçagrafic[this.tipo][this.angle][py][px]
+                    taulell[this.y + py][this.x + px] =  this.tipo + 2
                 }
                 
             }
@@ -329,36 +336,15 @@ let objPeça = function () {
         for (let py = 0; py < 4; py++) {
             for (let px = 0; px < 4; px++) {
                 if (peçagrafic[this.tipo][this.angle][py][px] != 0) {
-                    if (peçagrafic[this.tipo][this.angle][py][px] == 1) {
-                        ctx.fillStyle = '#44b311';
-                
-                    }
-                    
-                    if (peçagrafic[this.tipo][this.angle][py][px] == 2) {
-                        ctx.fillStyle = '#0059ff';
-                    }
-                    if (peçagrafic[this.tipo][this.angle][py][px] == 3) {
-                        ctx.fillStyle = '#ff006a';
-                    }
-                    if (peçagrafic[this.tipo][this.angle][py][px] == 4) {
-                        ctx.fillStyle = '#f700ff';
-                    }
-                    if (peçagrafic[this.tipo][this.angle][py][px] == 5) {
-                        ctx.fillStyle = '#4c00ff';
-                    }
-                    if (peçagrafic[this.tipo][this.angle][py][px] == 6) {
-                        ctx.fillStyle = '#fbff00';
-                    }
-                    if (peçagrafic[this.tipo][this.angle][py][px] == 7) {
-                        ctx.fillStyle = '#ffcfcf';
-                        
-                    }
-                    if (peçagrafic[this.tipo][this.angle][py][px] == 8) {
-                        ctx.fillStyle = '#aa822a';
-                    }
-                    if (peçagrafic[this.tipo][this.angle][py][px] == 9) {
-                        ctx.fillStyle = '#18a0b3';
-                    }
+              
+     if ( this.tipo == 0) ctx.fillStyle = '#44b311';
+                if (this.tipo == 1) ctx.fillStyle = '#0059ff'; 
+                if (this.tipo == 2) ctx.fillStyle = '#ff006a'; 
+                if (this.tipo == 3) ctx.fillStyle = '#f700ff'; 
+                if (this.tipo == 4) ctx.fillStyle = '#fbff00'; 
+                if (this.tipo == 5) ctx.fillStyle = '#ffcfcf'; 
+                if (this.tipo == 6) ctx.fillStyle = '#aa822a'; 
+                if (this.tipo == 7) ctx.fillStyle = '#18a0b3'; 
                     ctx.fillRect((this.x + px - 1) * ampleF, (this.y + py - 4) * altF, ampleF, altF);
                 }
             }
@@ -482,10 +468,13 @@ function inicia() {
 
     let canço = new Audio("audio1.mp3")
     document.getElementById("musica").addEventListener ("click", function () {
+      canço.loop = true
         if (canço.paused){
             canço.play();
+            this.textContent= "STOP";
         }else{
             canço.pause()
+            this.textContent ="PLAY"
         }
         
     
